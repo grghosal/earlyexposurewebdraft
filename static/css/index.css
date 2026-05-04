@@ -1,0 +1,241 @@
+body {
+  font-family: 'Noto Sans', sans-serif;
+}
+
+
+.footer .icon-link {
+    font-size: 25px;
+    color: #000;
+}
+
+.link-block a {
+    margin-top: 5px;
+    margin-bottom: 5px;
+}
+
+.dnerf {
+  font-variant: small-caps;
+}
+
+
+.teaser .hero-body {
+  padding-top: 0;
+  padding-bottom: 3rem;
+}
+
+.teaser {
+  font-family: 'Google Sans', sans-serif;
+}
+
+
+.publication-title {
+}
+
+.publication-banner {
+  max-height: parent;
+
+}
+
+.publication-banner video {
+  position: relative;
+  left: auto;
+  top: auto;
+  transform: none;
+  object-fit: fit;
+}
+
+.publication-header .hero-body {
+}
+
+.publication-title {
+    font-family: 'Google Sans', sans-serif;
+}
+
+.publication-authors {
+    font-family: 'Google Sans', sans-serif;
+}
+
+.publication-venue {
+    color: #555;
+    width: fit-content;
+    font-weight: bold;
+}
+
+.publication-awards {
+    color: #ff3860;
+    width: fit-content;
+    font-weight: bolder;
+}
+
+.publication-authors {
+}
+
+.publication-authors a {
+   color: hsl(204, 86%, 53%) !important;
+}
+
+.publication-authors a:hover {
+    text-decoration: underline;
+}
+
+.author-block {
+  display: inline-block;
+}
+
+.publication-banner img {
+}
+
+.publication-authors {
+  /*color: #4286f4;*/
+}
+
+.publication-video {
+    position: relative;
+    width: 100%;
+    height: 0;
+    padding-bottom: 56.25%;
+
+    overflow: hidden;
+    border-radius: 10px !important;
+}
+
+.publication-video iframe {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+
+.publication-body img {
+}
+
+.results-carousel {
+  overflow: hidden;
+}
+
+.results-carousel .item {
+  margin: 5px;
+  overflow: hidden;
+  padding: 20px;
+  font-size: 0;
+}
+
+.results-carousel video {
+  margin: 0;
+}
+
+.slider-pagination .slider-page {
+  background: #000000;
+}
+
+.eql-cntrb { 
+  font-size: smaller;
+}
+
+/* Decrease the width of the website */
+.container {
+  max-width: 700px !important;
+  margin-left: auto !important;
+  margin-right: auto !important;
+}
+
+.container.is-max-desktop {
+  max-width: 700px !important;
+  margin-left: auto !important;
+  margin-right: auto !important;
+}
+
+/* Ensure hero sections also respect the narrower width */
+.hero .container {
+  max-width: 800px !important;
+  margin-left: auto !important;
+  margin-right: auto !important;
+}
+
+/* Adjust section containers as well */
+.section .container {
+  max-width: 800px !important;
+  margin-left: auto !important;
+  margin-right: auto !important;
+}
+
+/* Make images responsive and fit within the narrower container */
+img {
+  max-width: 45% !important;
+  height: auto !important;
+  display: inline-block !important;
+  margin: 5px !important;
+}
+
+.teaser-image {
+  max-width: 45% !important;
+  height: auto !important;
+  display: inline-block !important;
+  margin: 5px !important;
+}
+
+.imp-image {
+  width: 600px !important;
+  max-width: none !important;
+  height: auto !important;
+  display: block !important;
+  margin: 10px auto !important;
+}
+
+/* More specific rules to override any conflicts */
+img.imp-image {
+  width: 600px !important;
+  max-width: none !important;
+  height: auto !important;
+  display: block !important;
+  margin: 10px auto !important;
+}
+
+/* Override center img rules for imp-image */
+center img.imp-image {
+  width: 600px !important;
+  max-width: none !important;
+  height: auto !important;
+  display: block !important;
+  margin: 10px auto !important;
+}
+
+/* Most specific rule to override all conflicts for imp-image */
+.hero .container center img.imp-image,
+.section .container center img.imp-image,
+.container center img.imp-image {
+  width: 600px !important;
+  max-width: none !important;
+  height: auto !important;
+  display: block !important;
+  margin: 10px auto !important;
+}
+
+/* Ensure images in content areas don't overflow */
+.content img {
+  max-width: 45% !important;
+  height: auto !important;
+  display: inline-block !important;
+  margin: 5px !important;
+}
+
+/* Make sure center-aligned images respect container width */
+center img {
+  max-width: 45% !important;
+  height: auto !important;
+  display: inline-block !important;
+  margin: 5px !important;
+}
+
+/* Specific rule for the first figure to override conflicts */
+.hero.teaser center img {
+  max-width: 1000px !important;
+  width: 100% !important;
+  height: auto !important;
+  display: block !important;
+  margin: 10px auto !important;
+}
+
+
+

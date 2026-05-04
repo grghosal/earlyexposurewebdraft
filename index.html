@@ -1,0 +1,378 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <!-- Meta tags for social media banners, these should be filled in appropriatly as they are your "business card" -->
+  <!-- Replace the content tag with appropriate information -->
+  <meta name="description" content="Large language models are susceptible to memorizing repeated sequences, posing privacy and copyright concerns. A popular mitigation strategy is to remove memorized information from specific neurons post-hoc. However, such approaches have shown limited success so far. In a controlled setting, we show that the memorization of \emph{natural} sequences (those that resemble linguistically plausible text) become \emph{mechanistically entangled} with general language abilities, thereby becoming challenging to remove post-hoc. In this work, we put forward a new paradigm of \seqtd that promotes isolation of memorization by design. We leverage a sequence identifier to activate a unique set of memorization neurons for each sequence across repetitions. By analyzing the dynamics of learning and forgetting, we argue that \seqtd facilitates clean isolation of memorized content, making it easier to remove without compromising general language capabilities. We implement \seqtd at the billion-parameter and billion-token scale, and observe both effective isolation and strong generalization. To our knowledge, this is the first proof-of-concept on real data demonstrating that simultaneous generalization and isolation is achievable. We open-source our code at http://github.com/grghosal/MemSinks">
+  <meta property="og:title" content="Early Data Exposure Improves
+  Robustness to Subsequent Fine-Tuning"/>
+  <meta property="og:description" content=""/>
+  <meta property="og:url" content="https://grghosal.github.io/memsinksweb/"/>
+  <!-- Path to banner image, should be in the path listed below. Optimal dimenssions are 1200X630-->
+  <meta property="og:image" content="static/image/sink.png" />
+  <meta property="og:image:width" content="1200"/>
+  <meta property="og:image:height" content="630"/>
+
+
+  <meta name="twitter:title" content="Early Data Exposure Improves Robustness to Subsequent Fine-Tuning">
+  <meta name="twitter:description" content="We present a new paradigm to isolate memorization by design during LLM training.">
+  <!-- Path to banner image, should be in the path listed below. Optimal dimenssions are 1200X600-->
+  <meta name="twitter:image" content="static/image/sink.png">
+  <meta name="twitter:card" content="summary_large_image">
+  <!-- Keywords for your paper to be indexed by-->
+  <meta name="keywords" content="Unlearning, Memorization, Pretraining, LLM">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+
+  <title>Early Data Exposure Improves Robustness to Subsequent Fine-Tuning </title>
+  <link rel="icon" type="image/x-icon" href="static/images/sink.png">
+  <link href="https://fonts.googleapis.com/css?family=Google+Sans|Noto+Sans|Castoro"
+  rel="stylesheet">
+
+  <link rel="stylesheet" href="static/css/bulma.min.css">
+  <link rel="stylesheet" href="static/css/bulma-carousel.min.css">
+  <link rel="stylesheet" href="static/css/bulma-slider.min.css">
+  <link rel="stylesheet" href="static/css/fontawesome.all.min.css">
+  <link rel="stylesheet"
+  href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
+  <link rel="stylesheet" href="static/css/index.css?v=2">
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://documentcloud.adobe.com/view-sdk/main.js"></script>
+  <script defer src="static/js/fontawesome.all.min.js"></script>
+  <script src="static/js/bulma-carousel.min.js"></script>
+  <script src="static/js/bulma-slider.min.js"></script>
+  <script src="static/js/index.js"></script>
+</head>
+<body>
+
+
+  <section class="hero">
+    <div class="hero-body">
+      <div class="container is-max-desktop">
+        <div class="columns is-centered">
+          <div class="column has-text-centered">
+            <h1 class="title is-1 publication-title">Early Data Exposure Improves Robustness to Subsequent Fine-Tuning</h1>
+            <div class="is-size-5 publication-authors">
+              <!-- Paper authors -->
+              <span class="author-block">Lawrence Feng</span>,
+              <span class="author-block">
+                <a href="https://grghosal.github.io/" target="_blank">Gaurav R. Ghosal</a></span>,
+              <span class="author-block">Jacob Mitchell Springer</span>,
+              <span class="author-block">Ziqian Zhong</span>,
+              <span class="author-block">
+                <a href="https://www.cs.cmu.edu/~aditirag/" target="_blank">Aditi Raghunathan</a>
+              </span>
+            </div>
+
+                  <div class="is-size-5 publication-authors">
+                    <span class="author-block">Carnegie Mellon University</span>
+                  </div>
+
+                  <div class="column has-text-centered">
+                    <div class="publication-links">
+                         <!-- Arxiv PDF link -->
+                      <span class="link-block">
+                        <a href="https://arxiv.org/pdf/2507.09937" target="_blank"
+                        class="external-link button is-normal is-rounded is-dark">
+                        <span class="icon">
+                          <i class="fas fa-file-pdf"></i>
+                        </span>
+                        <span>Paper</span>
+                      </a>
+                    </span>
+
+
+                  <!-- Github link -->
+                  <span class="link-block">
+                    <a href="https://github.com/grghosal/MemSinks" target="_blank"
+                    class="external-link button is-normal is-rounded is-dark">
+                    <span class="icon">
+                      <i class="fab fa-github"></i>
+                    </span>
+                    <span>Code</span>
+                  </a>
+                </span>
+
+                <!-- ArXiv abstract Link -->
+                <span class="link-block">
+                  <a href="https://arxiv.org/abs/2507.09937" target="_blank"
+                  class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                    <i class="ai ai-arxiv"></i>
+                  </span>
+                  <span>arXiv</span>
+                </a>
+              </span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- Teaser video-->
+<section class="hero teaser">
+  <div class="container is-max-desktop">
+    <div class="hero-body">
+      <center>
+        <img src="static/images/8panel.png" alt="Figure 1" style="width: 100%; max-width: 1000px; height: auto; display: block; margin: 10px auto;">
+      </center>
+      <h2 class="subtitle has-text-centered">
+      Standard training of LLMs acquires capabilities during post-training that are often lost during later fine-tuning. As a result, models struggle to retain important behaviors when adapted to new tasks. Our approach mixes a small amount of target data into pretraining. This improves robustness to forgetting, enabling better retention after downstream training.
+      </h2>
+    </div>
+  </div>
+</section>
+<!-- End teaser video -->
+
+<!-- Paper abstract -->
+<section class="section hero is-light">
+  <div class="container is-max-desktop">
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-four-fifths">
+        <h2 class="title is-3">TL;DR</h2>
+        <div class="content has-text-justified">
+          <ul style="font-size: 1.2em; line-height: 1.6;">
+            <li><strong>🚫 The Problem:</strong> Post-trained capabilities are <strong>fragile</strong> — fine-tuning on new tasks can erase previously learned behaviors due to entanglement with general features.</li>
+            <li><strong>💡 The Insight:</strong> When a model learns matters as much as what it learns. Introducing target data early (during pretraining) changes how the capability is represented — shifting it into more isolated, robust features that resist later overwriting.</li>
+            <li><strong>✅ The Result:</strong> Early exposure improves retention without hurting performance — shifting the tradeoff frontier and making capabilities resistant to forgetting.</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<!-- End paper abstract -->
+<!-- Paper poster -->
+<section class="hero is-small is-small">
+  <div class="hero-body">
+    <div class="container is-max-fullhd">
+      <div class="content has-text-justified">
+        <p>
+          <strong>Current approaches</strong> for removing memorization rely on post-hoc weight updates (unlearning), assuming memorization is separate from general capabilities. We test this in two settings:
+        </p>
+        <ul style="margin-left: 20px;">
+          <li><i>Natural sequences:</i> Linguistically plausible text that pose copyright/privacy concerns</li>
+          <li><i>Canaries:</i> Random/atypical sequences used in controlled studies</li>
+        </ul>
+        <p>
+          <strong>Key Finding:</strong> removing natural memorized sequences (passages from books, articles, etc) can significantly compromise general capabilities.
+        </p>
+
+          <div style="width: 100vw; margin-left: calc(50% - 50vw); margin-right: calc(50% - 50vw); padding: 0 clamp(8px, 2vw, 24px); box-sizing: border-box; display: flex; justify-content: center; align-items: center;">
+          <img src="static/images/RetentionAndMultiStage.png" alt="Multi-stage training: acquiring capability X and retention after fine-tuning for task Y" style="width: min(2200px, 94vw); max-width: 100%; height: auto; display: block; margin: 10px 0;">
+          </div>
+          <p>
+            <center>
+              <b><i>Fig 2: Shortcomings of Post-Hoc Methods.</i></b> We show that state-of-the-art techniques for removing memorization induce a <it>tradeoff</it> between getting rid of memorization and preserving the model's general capabilities. This tradeoff is particularly amplified when memorized sequences consist of repeated, natural text. 
+            </center>
+          </p>
+
+          <div style="text-align: center; margin: 30px 0; padding: 20px; background-color: #f5f5f5; border-left: 5px solid #3273dc;">
+            <p style="font-size: 24px; font-weight: bold; color: #3273dc; margin: 0;">
+              🚨 Standard training may not yield easy to unlearn models
+            </p>
+          </div>
+          <div style="background-color: rgba(225, 200, 245, 0.4);padding-left: 20px;padding-right: 20px;margin: 10px;padding-top: 10px;padding-bottom: 10px;width: 100%;border: 2px solid black;border-radius: 6px;">
+            <p style="font-size: 20px; font-weight: bold;">🧠 Theoretical Intuition</p>
+            <p>Why is memorized natural text challenging to remove post-hoc? In the paper, we theoretically analyze simplified linear neural network models and show that minimimum norm bias of gradient flow prefers solutions which reuse neurons for memorization and general language capabilities. </p>
+          </div>
+      </div>
+    </div>
+  </section>
+<!--End paper poster -->
+
+<section class="hero is-small">
+  <div class="hero-body">
+    <div class="container">
+      <h2 class="title">MemSinks: Isolating Memorization By Design</h2>
+      <div class="content has-text-justified">
+        <p >
+          Given the shortcomings of removing memorization post-hoc, we propose a new training paradigm, <strong>MemSinks</strong> to simultaneously achieve two goals:
+          <div style="background-color: rgba(173, 216, 230, 0.5);margin: 0px;padding-top: 10px;padding-bottom: 10px;width: 100%;padding-left: 20px;padding-right: 20px;border: 2px solid black;border-radius: 6px;">
+          <p style="font-size: 20px; font-weight: bold;">Desiderata </p>
+          <p><strong>Isolate Memorization</strong>: Memorization should be stored in a known and removable set of neurons.</p>
+          <p><strong>Preserve General Capabilities</strong>: The model should learn general capabilities from all data.</p>
+
+          
+          </div>
+
+        </p>
+        <p>We achieve this by proposing a training method (described next) which isolates memorization to special ``sink” neurons that can be straightforwardly removed post-hoc.
+          </p>
+          <h3 class="title">Implementing MemSinks</h3>
+
+          <h4 class="title"> &#9997; Annotate Pretraining Data</h4>
+          <center>
+          <img src="static/images/AnnotateDataWhite.png" alt="Teaser Image" class="imp-image" style="width: 600px !important; max-width: none !important; height: auto !important; display: block !important; margin: 10px auto !important;">
+        </center>
+          <p>
+            To deploy MemSinks, we first annotate the training data to specify how sequences should be localized. In our work, we primarily examine the memorization of repeated documents and thus give each pretraining document an ID. </p>
+   
+        <div style="background-color: rgba(225, 200, 245, 0.4);padding-left: 20px;padding-right: 20px;margin: 10px;padding-top: 10px;padding-bottom: 10px;width: 100%;border: 2px solid black;border-radius: 6px;">
+          <p style="font-size: 20px; font-weight: bold;">&#128187; Implementation Details</p>
+          <p><strong>Generating Sequence Annotations:</strong> We can efficiently generate sequence annotations by simply hashing the tokens in each document.</p>
+        </div>
+        <div style="opacity: 1.0;background-color: rgba(173, 216, 230, 0.5);padding-left: 20px;padding-right: 20px;margin: 10px;padding-top: 10px;padding-bottom: 10px;width: 100%;border: 2px solid black;border-radius: 6px;">
+          <p style="font-size: 20px; font-weight: bold;">&#9193; Future Work</p>
+          <p><strong>Alternative Annotation Approaches:</strong> An interesting future direction is to explore alternative ways to annotate data. Leveraging information such as the document source, topic, or semantic clusters could potentially enable localization (and unlearning)
+          at coarser levels of granularity. </p>
+        </div>
+        <div style="margin-top: 30px;"></div>
+      
+        <h4 class="title">🫵 Designate MemSinks</h4>
+          <center>
+          <img src="static/images/DesignateMemorizationSinks.png" alt="Teaser Image" class="imp-image" style="width: 600px !important; max-width: none !important; height: auto !important; display: block !important; margin: 10px auto !important;">
+        </center>
+        <p> We split the hidden MLP neurons at each transformer layer into two groups:<strong> sink neurons</strong> and <strong>general neurons</strong>. Sink neurons specialize to memorization, while general neurons aggregagte capabilities across the corpus. </p>
+        <h4 class="title">⏻ Selectively Activate Sinks during Training</h4>
+        <center>
+          <img src="static/images/SelectiveActivation.png" alt="Teaser Image" class="imp-image" style="width: 600px !important; max-width: none !important; height: auto !important; display: block !important; margin: 10px auto !important;">
+        </center>
+        <p> During training, <strong> only a subset of sink neurons </strong> are activated on any given training update. The subset of sink neurons activated is determined using the sequence identifier annotations. This ensures that repeated data updates a consistent set of sink neurons throughout training. </p>
+        <p>Our masking of sink neurons is inspired by dimensionality reduction. Ideally, each sequence would have a dedicated set of neurons to store its memorization. However, this would require the number of neurons to grow with the total number of training sequences! Our neuron masking scheme can be viewed as a low-dimensional projection of this ideal case and we empirically find this is sufficient to encourage localization! </p>
+        <div style="background-color: rgba(225, 200, 245, 0.4);padding-left: 20px;padding-right: 20px;margin: 10px;padding-top: 10px;padding-bottom: 10px;width: 100%;border: 2px solid black;border-radius: 6px;">
+          <p style="font-size: 20px; font-weight: bold;">&#128187; Implementation Details</p>
+          <p><strong>Loading Sequence Annotations:</strong> We store sequence identifiers for each token and interleave them into the token stream, enabling efficient data loading while maintaining sequence-level information even when chunks cross document boundaries. </p>
+          <p><strong>Efficiently Implementing Selective Activation of Sinks:</strong> We implement selective activation using deterministic binary masks computed from sequence identifiers. Our tensorized seeded random number generator efficiently computes activation masks on-the-fly, avoiding the need to pre-compute and store masks for every sequence. </p>
+        </div>      
+      <div style="margin-top: 30px;"></div>
+      <h4 class="title">🗑️ Throw Away Sinks</h4>
+      <p> Given a model trained with MemSinks, we can remove memorized sequences by simply dropping out the sink neurons. No finetuning needed!</p>
+
+      <div style="background-color: rgba(173, 216, 230, 0.5);padding-left: 20px;padding-right: 20px;margin: 10px;padding-top: 10px;padding-bottom: 10px;width: 100%;border: 2px solid black;border-radius: 6px;">
+        <p style="font-size: 20px; font-weight: bold;">&#9193; Future Work</p>
+        <p><strong>Targeted Unlearning</strong> In this work, we focused primarily on removing memorization entirely from the model. As such, we primarily test the case of removing all sink neurons. However, an important direction for future work is to enable targeted removal of specific memorized sequences, while preserving others.</p>
+      </div>
+      <p>MemSinks are similar to Mixture of Experts models (MOE), which also selectively activate model components. In MOEs, however, the activation of experts is performed by a <strong>learned router</strong>, which empirically struggles to enforce localization (i.e. <a href="https://arxiv.org/abs/2202.08906">[1]</a> ,<a href="https://arxiv.org/abs/2401.06066">[2]</a>). The learned router means that MOEs provide no explicit control over how memorization is stored.</p>
+      <p>In MemSinks, we get rid of the learned router and directly enforce a pre-specified localizaiton scheme (using the sequence annotations). This allows the model designer direct control over how memorization is stored, enabling removal by design.</p>
+    </div>
+    </div>   
+    </section>
+    <section class="hero is-small">
+
+      <div class="hero-body">
+        
+        <div class="container">
+          <h3 class="title">Small Scale Validation of MemSinks</h3>
+          <div class="content has-text-justified">
+            <h4 class="title">🔬 Experimental Setup</h4>
+            <ul style="margin-left: 20px; margin-bottom: 15px;">
+              <li>📚<strong>Data:</strong> We validated MemSinks on a small-scale setting using a small scale TinyStories dataset, where some stories were heavily repeated.</li>
+              <li>⚖️ <strong>Comparison Method:</strong> We compared standard trained models with MemSinks (where sinks were dropped out)</li>
+            </ul>
+            <p></p> Our findings in Figure 2 provide compelling evidence that MemSinks satisfies our two desiderata:</p>
+
+               <div style="background-color: rgba(225, 200, 245, 0.4);margin: 0px;padding-top: 10px;padding-bottom: 10px;width: 100%;padding-left: 20px;padding-right: 20px;border: 2px solid black;border-radius: 6px;;margin-bottom: 20px;">
+                <p style="font-size: 20px; font-weight: bold;">&#127942; Desiderata </p>
+                <p> ✅  <strong>Isolate Memorization:</strong> In the middle panel of Figure 2, we see that the MemSinks model has significantly higher loss on the repeated stories than standard training.</p>
+                <p> ✅ <strong>Preserve General Capabilities:</strong> We see that MemSinks achieves comparable validation loss as standard training in the left panel of Figure 2. Moreover, the right panel of Figure 2 shows that MemSinks achieves a better tradeoff between removing memorization and preserving general capabilities than post-hoc methods.</p>
+              </div>
+            <center>
+            <img src="static/images/MemSinksVal.png" alt="Teaser Image" class="teaser-image" width  = "400px">
+            <img src="static/images/MemSinksMem.png" alt="Teaser Image" class="teaser-image" width  = "400px">
+            <img src="static/images/SeqTiedTradeoffInv.png" alt="Teaser Image" class="teaser-image" width  = "410px">
+            </center>
+          
+        <p>
+          <center>
+          <b><i>Fig 2: Performance of MemSinks.</i></b> (Left) MemSinks achieves comparable validation loss as standard training. (Center) MemSinks memorizes significantly less than standard training. (Right) MemSinks achieves a better tradeoff between removing memorization and preserving general capabilities than post-hoc methods.
+          </center>
+        </p>
+      </div>
+    </div>
+      </div>
+      </section>
+
+        
+        
+    </div>
+  </section>
+
+    <section class="hero is-small">
+      <div class="hero-body">
+        <div class="container">
+          <h2 class="title">Scaling MemSinks to 1B Parameter Model</h2>
+          <div class="content has-text-justified">
+            <p>
+            </p>
+            <h4 class="title">🔬 Experimental Setup</h4>
+            <ul style="margin-left: 20px;">
+              <li><strong>Dataset:</strong> Mixture of SlimPajama and Wikipedia documents</li>
+              <li><strong>Method:</strong> Upsampling to improve Wikipedia dataset performance</li>
+              <li><strong>Goal:</strong> Achieve good Wikipedia performance while avoiding verbatim memorization</li>
+            </ul>
+            
+            Our results in Figure 3 validate MemSinks at larger scale and on real, heterogenous pretraining data!
+            <center>
+              <img src="static/images/MemSinks17B.png" alt="Teaser Image" class="teaser-image" width  = "400px">
+              <img src="static/images/MemSinks360.png" alt="Teaser Image" class="teaser-image" width  = "400px">
+            </center>
+            <p>
+              <center>
+              <b><i>Fig 3: Scaling MemSinks to 1B Parameter Model.</i></b> Training loss curves for 1.7B (left) and 360M (right) parameter models trained on a mixture of Wikipedia and SlimPajama data. We observe that MemSinks models memorize less than standard training, while achieving comparable validation loss.
+              </center>
+            </p>
+          </div>
+    
+            </section>
+            
+        </div>
+      </section>
+<!--End paper poster -->
+
+
+
+
+
+
+
+
+
+<!--BibTex citation -->
+  <section class="section" id="BibTeX">
+    <div class="container is-max-desktop content">
+      <h2 class="title">BibTeX</h2>
+      <pre><code>@inproceedings{
+        ghosal2025memorization,
+        title={Memorization Sinks: Isolating Memorization during {LLM} Training},
+        author={Lawrence Feng and Gaurav R. Ghosal and Jacob Mitchell Springer and Ziqian Zhong and Aditi Raghunathan},
+        booktitle={Forty-second International Conference on Machine Learning},
+        year={2025},
+        url={https://openreview.net/forum?id=sRJrMPu5Uu}
+        }</code></pre>
+    </div>
+</section>
+<!--End BibTex citation -->
+
+
+  <footer class="footer">
+  <div class="container">
+    <div class="columns is-centered">
+      <div class="column is-8">
+        <div class="content">
+
+          <p>
+            This page was built using the <a href="https://github.com/eliahuhorwitz/Academic-project-page-template" target="_blank">Academic Project Page Template</a> which was adopted from the <a href="https://nerfies.github.io" target="_blank">Nerfies</a> project page.
+            You are free to borrow the source code of this website, we just ask that you link back to this page in the footer. <br> This website is licensed under a <a rel="license"  href="http://creativecommons.org/licenses/by-sa/4.0/" target="_blank">Creative
+            Commons Attribution-ShareAlike 4.0 International License</a>.
+          </p>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<!-- Statcounter tracking code -->
+  
+<!-- You can add a tracker to track page visits by creating an account at statcounter.com -->
+
+    <!-- End of Statcounter Code -->
+
+  </body>
+  </html>
