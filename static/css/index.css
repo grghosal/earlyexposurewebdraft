@@ -259,3 +259,32 @@ center img {
   line-height: 1.55 !important;
   font-style: normal !important;
 }
+
+/* Experiment / setup bullet blocks */
+.experiment-details {
+  background-color: rgba(21, 128, 61, 0.09);
+  padding: 16px 20px;
+  margin: 12px 0;
+  width: 100%;
+  max-width: 100%;
+  border-radius: 0;
+  box-sizing: border-box;
+  border-left: 4px solid rgba(21, 128, 61, 0.65);
+}
+
+.experiment-details p {
+  margin-bottom: 0.75rem;
+}
+
+.experiment-details p:last-child {
+  margin-bottom: 0;
+}
+
+.experiment-details > ul {
+  margin-top: 0 !important;
+  margin-bottom: 0 !important;
+}
+
+.experiment-details > p + ul {
+  margin-top: 0 !important;
+}
