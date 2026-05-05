@@ -168,14 +168,39 @@
           <img src="static/images/RetentionAndMultiStage.png" alt="Multi-stage training: acquiring capability X and retention after fine-tuning for task Y" style="width: min(2200px, 94vw); max-width: 100%; height: auto; display: block; margin: 10px 0;">
           </div>
           <p>
-            <center>
-              <b><i>Figure 2: Sequential training pipeline in LLMs.</i></b> A model is first pretrained (θ<sub>pre</sub>) to learn general representations, then post-trained to acquire a specific capability <i>X</i> (θ<sub>post</sub>), and finally fine-tuned by a downstream user for a new task <i>Y</i> (θ<sub>ft</sub>). The key question is whether the capability learned during post-training is preserved after downstream fine-tuning, highlighting the potential for later updates to modify or overwrite earlier knowledge.
-            </center>
+            <b><i>Figure 2: Sequential training pipeline in LLMs.</i></b> A model is first pretrained (θ<sub>pre</sub>) to learn general representations, then post-trained to acquire a specific capability <i>X</i> (θ<sub>post</sub>), and finally fine-tuned by a downstream user for a new task <i>Y</i> (θ<sub>ft</sub>). The key question is whether the capability learned during post-training is preserved after downstream fine-tuning, highlighting the potential for later updates to modify or overwrite earlier knowledge.
           </p>
       </div>
     </div>
   </section>
 <!--End paper poster -->
+
+<section class="hero is-small is-small">
+  <div class="hero-body">
+    <div class="container is-max-fullhd">
+      <h2 class="title">🚨 Immediate Performance ≠ Long-term Retention</h2>
+      <div class="content has-text-justified">
+        <div style="width: 100vw; margin-left: calc(50% - 50vw); margin-right: calc(50% - 50vw); padding: 0 clamp(8px, 2vw, 24px); box-sizing: border-box; display: flex; justify-content: center; align-items: center;">
+          <img src="static/images/SamePTDifferentRetention.png" alt="Illustration: identical immediate post-training performance with differing retention after downstream fine-tuning" style="width: min(2200px, 94vw); max-width: 100%; height: auto; display: block; margin: 10px 0;">
+        </div>
+        <p>
+          <b><i>Figure 3: Same post-training performance, differing retention.</i></b> Mixing doesn’t help immediately—but it matters later. As λ (fraction of data mixed during pre-training) increases, post-training loss stays flat, while retention after fine-tuning improves.
+        </p>
+        <p>
+          We study how early exposure to post-training data affects downstream retention. We vary how much of the target data is introduced during pretraining (λ), then train all models to convergence on the same post-training objective before fine-tuning on a new task.
+        </p>
+        <ul style="margin-left: 20px;">
+          <li><strong>Controlled setup:</strong> Vary λ while keeping post-training procedure fixed</li>
+          <li><strong>Equalized performance:</strong> All models reach similar loss after post-training</li>
+          <li><strong>Downstream evaluation:</strong> Fine-tune on a new task to induce forgetting</li>
+        </ul>
+        <p>
+          <strong>Key Observation:</strong> Immediate performance is unchanged across λ, but retention improves with early exposure—models that see more data during pretraining consistently forget less after fine-tuning.
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
 
 <section class="hero is-small">
   <div class="hero-body">
