@@ -36,7 +36,7 @@
   <link rel="stylesheet" href="static/css/fontawesome.all.min.css">
   <link rel="stylesheet"
   href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
-  <link rel="stylesheet" href="static/css/index.css?v=2">
+  <link rel="stylesheet" href="static/css/index.css?v=7">
 
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
   <script src="https://documentcloud.adobe.com/view-sdk/main.js"></script>
@@ -56,7 +56,7 @@
             <h1 class="title is-1 publication-title">Early Data Exposure Improves Robustness to Subsequent Fine-Tuning</h1>
             <div class="is-size-5 publication-authors">
               <!-- Paper authors -->
-              <span class="author-block">Lawrence Feng</span>,
+              <span class="author-block"><a href="https://lawrencefeng17.github.io/" target="_blank">Lawrence Feng</a></span>,
               <span class="author-block">
                 <a href="https://grghosal.github.io/" target="_blank">Gaurav R. Ghosal</a></span>,
               <span class="author-block">Jacob Mitchell Springer</span>,
@@ -107,9 +107,9 @@
   <div class="container is-max-desktop">
     <div class="hero-body">
       <center>
-        <img src="static/images/8panel.png" alt="Figure 1" style="width: 100%; max-width: 1000px; height: auto; display: block; margin: 10px auto;">
+        <img src="static/images/8panel.png" alt="Figure 1" style="width: 100%; max-width: 100%; height: auto; display: block; margin: 10px auto;">
       </center>
-      <h2 class="subtitle has-text-centered">
+      <h2 class="subtitle has-text-centered figure-caption">
       Standard training of LLMs acquires capabilities during post-training that are often lost during later fine-tuning. As a result, models struggle to retain important behaviors when adapted to new tasks. Our approach mixes a small amount of target data into pretraining. This improves robustness to forgetting, enabling better retention after downstream training.
       </h2>
     </div>
@@ -138,13 +138,11 @@
 <!-- Paper poster -->
 <section class="hero is-small is-small">
   <div class="hero-body">
-    <div class="container is-max-fullhd">
+    <div class="container is-max-desktop">
       <h2 class="title">The Retention Problem in LLM Pipelines</h2>
       <div class="content has-text-justified">
-          <div style="width: 100vw; margin-left: calc(50% - 50vw); margin-right: calc(50% - 50vw); padding: 0 clamp(8px, 2vw, 24px); box-sizing: border-box; display: flex; justify-content: center; align-items: center;">
-          <img src="static/images/RetentionAndMultiStage.png" alt="Multi-stage training: acquiring capability X and retention after fine-tuning for task Y" style="width: min(2200px, 94vw); max-width: 100%; height: auto; display: block; margin: 10px 0;">
-          </div>
-          <p>
+          <img class="content-figure" src="static/images/RetentionAndMultiStage.png" alt="Multi-stage training: acquiring capability X and retention after fine-tuning for task Y" style="width: 100%; max-width: 100%; height: auto; display: block; margin: 10px 0;">
+          <p class="figure-caption">
             <b><i>Figure 2: Sequential training pipeline in LLMs.</i></b> A model is first pretrained (θ<sub>pre</sub>) to learn general representations, then post-trained to acquire a specific capability <i>X</i> (θ<sub>post</sub>), and finally fine-tuned by a downstream user for a new task <i>Y</i> (θ<sub>ft</sub>). The key question is whether the capability learned during post-training is preserved after downstream fine-tuning, highlighting the potential for later updates to modify or overwrite earlier knowledge.
           </p>
         <p>
@@ -154,7 +152,7 @@
           <li><strong>Upstream acquisition:</strong> Learning a target capability <i>X</i> during post-training</li>
           <li><strong>Downstream adaptation:</strong> Fine-tuning the model for a new task <i>Y</i></li>
         </ul>
-        <div style="background-color: rgba(185, 28, 28, 0.12); padding: 16px 20px; margin: 10px 0; width: 100%; border: 2px solid #b91c1c; border-radius: 6px; box-sizing: border-box;">
+        <div style="background-color: rgba(185, 28, 28, 0.12); padding: 16px 20px; margin: 10px 0; width: 100%; border-radius: 0; box-sizing: border-box;">
           <p style="margin: 0 0 10px 0; font-size: 1.45em; font-weight: bold; color: #b91c1c;">Key Challenge</p>
           <p style="margin: 0; font-weight: bold;">
             Capabilities acquired earlier in the pipeline are not inherently preserved—subsequent training can overwrite or degrade them.
@@ -168,13 +166,11 @@
 
 <section class="hero is-small is-small">
   <div class="hero-body">
-    <div class="container is-max-fullhd">
+    <div class="container is-max-desktop">
       <h2 class="title">Immediate Performance ≠ Long-term Retention</h2>
       <div class="content has-text-justified">
-        <div style="width: 100vw; margin-left: calc(50% - 50vw); margin-right: calc(50% - 50vw); padding: 0 clamp(8px, 2vw, 24px); box-sizing: border-box; display: flex; justify-content: center; align-items: center;">
-          <img src="static/images/SamePTDifferentRetention.png" alt="Illustration: identical immediate post-training performance with differing retention after downstream fine-tuning" style="width: min(2200px, 94vw); max-width: 100%; height: auto; display: block; margin: 10px 0;">
-        </div>
-        <p>
+        <img class="content-figure" src="static/images/SamePTDifferentRetention.png" alt="Illustration: identical immediate post-training performance with differing retention after downstream fine-tuning" style="width: 100%; max-width: 100%; height: auto; display: block; margin: 10px 0;">
+        <p class="figure-caption">
           <b><i>Figure 3: Same post-training performance, differing retention.</i></b> Mixing doesn’t help immediately—but it matters later. As λ (fraction of data mixed during pre-training) increases, post-training loss stays flat, while retention after fine-tuning improves.
         </p>
         <p>
@@ -185,10 +181,87 @@
           <li><strong>Equalized performance:</strong> All models reach similar loss after post-training</li>
           <li><strong>Downstream evaluation:</strong> Fine-tune on a new task to induce forgetting</li>
         </ul>
-        <div style="background-color: rgba(37, 99, 235, 0.12); padding: 16px 20px; margin: 10px 0; width: 100%; border: 2px solid #2563eb; border-radius: 6px; box-sizing: border-box;">
-          <p style="margin: 0 0 10px 0; font-size: 1.45em; font-weight: bold; color: #2563eb;">Key Observation</p>
+        <p>
+          We find that across λ (the ratio of post-training data mixed in during pre-training), models reach nearly the same MusicPile loss after post-training, demonstrating that early exposure has a negligible impact on immediate capability learning in our setting. After downstream fine-tuning, however, models with more early exposure forget less and retain substantially lower MusicPile loss. Our results illustrate that two models can look equally capable immediately after post-training, yet differ sharply in how much of that capability survives later updates.
+        </p>
+        <div style="background-color: rgba(37, 99, 235, 0.12); padding: 16px 20px; margin: 10px 0; width: 100%; border-radius: 0; box-sizing: border-box;">
+          <p style="margin: 0 0 10px 0; font-size: 1.45em; font-weight: bold; color: #2563eb;">Takeaway</p>
           <p style="margin: 0; font-weight: bold;">
             Immediate performance is unchanged across λ, but retention improves with early exposure—models that see more data during pretraining consistently forget less after fine-tuning.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="hero is-small is-small">
+  <div class="hero-body">
+    <div class="container is-max-desktop">
+      <h2 class="title">Where You Put the Data Matters</h2>
+      <div class="content has-text-justified">
+        <img class="content-figure" src="static/images/DataPlacement.png" alt="Schematic of how target data placement across pretraining versus post-training affects representations" style="width: 100%; max-width: 100%; height: auto; display: block; margin: 10px 0;">
+        <p class="figure-caption">
+          <b>Figure 4:</b> Under a fixed budget of steps on post-training data, increasing the fraction of data used during pretraining (λ) worsens immediate post-training loss but improves retained performance after fine-tuning. This highlights a tradeoff between short-term optimization and long-term retention.
+        </p>
+        <p>
+          Early exposure helps retention — but is that because the model sees the post-training data earlier, or simply because it sees more of it? To separate these effects, we fix the total amount of post-training data the model sees and vary only where that data is placed in the training pipeline.
+        </p>
+        <p>
+          We compare different allocations:
+        </p>
+        <ul style="margin-left: 20px;">
+          <li><strong>All post-training:</strong> use the full data budget during the post-training stage.</li>
+          <li><strong>Mixed allocation:</strong> expose the model to some of the data during pretraining, then reserve the rest for post-training.</li>
+          <li><strong>All early exposure:</strong> use the full data budget during pretraining.</li>
+        </ul>
+        <p>
+          Our results reveal a clear tradeoff: reserving more data for post-training improves immediate target-domain performance, since Stage 2 directly optimizes for that capability. But after downstream fine-tuning, the pattern reverses: models exposed to some of the data earlier retain the capability better, despite receiving less dedicated post-training exposure. Ultimately, post-training helps acquire the capability quickly, while early exposure helps it survive later updates—so the best allocation lies between the extremes of relying on pre-training or post-training solely.
+        </p>
+        <div style="background-color: rgba(37, 99, 235, 0.12); padding: 16px 20px; margin: 10px 0; width: 100%; border-radius: 0; box-sizing: border-box;">
+          <p style="margin: 0 0 10px 0; font-size: 1.45em; font-weight: bold; color: #2563eb;">
+            Data placement changes durability.
+          </p>
+          <p style="margin: 0; font-weight: bold;">
+            Even under a fixed data budget, allocating some target-domain data to pretraining improves retention after downstream fine-tuning, while reserving all of it for post-training gives the best immediate performance.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="hero is-small is-small">
+  <div class="hero-body">
+    <div class="container is-max-desktop">
+      <h2 class="title">Post-Training Interventions for Retention</h2>
+      <div class="content has-text-justified">
+        <img class="content-figure" src="static/images/Post-TrainingInterventions.png" alt="Overview of post-training interventions and their effect on retention after fine-tuning" style="width: 100%; max-width: 100%; height: auto; display: block; margin: 10px 0;">
+        <p class="figure-caption">
+          <b>Figure 5:</b> Placeholder caption — summarize what the panels show (e.g., intervention types, metrics, and retention relative to a baseline).
+        </p>
+        <p>
+          Early exposure is not the only way to make post-trained capabilities more durable. If <em>when</em> a model first sees the data matters, then a natural follow-up is whether we can also improve retention by changing how the model is post-trained.
+        </p>
+        <p>
+          We study two simple interventions during post-training:
+        </p>
+        <ul style="margin-left: 20px;">
+          <li><strong>Replay:</strong> mix a small amount of general pretraining data back into the post-training stage.</li>
+          <li><strong>Dropout:</strong> regularize the post-training update so the model does not rely too heavily on brittle representations.</li>
+        </ul>
+        <p>
+          Both methods are applied before the downstream fine-tuning stage. This lets us ask whether they merely improve the post-trained checkpoint immediately, or whether they actually help the capability survive later updates.
+        </p>
+        <p>
+          Across our experiments, replay and dropout improve the retention–adaptation frontier. Models trained with these interventions retain more of the post-trained capability after downstream fine-tuning, while still adapting well to the new task. However, these gains do not replace early exposure. The strongest frontiers come from combining pretraining-time mixing with post-training interventions, suggesting that they operate through complementary mechanisms.
+        </p>
+        <div style="background-color: rgba(37, 99, 235, 0.12); padding: 16px 20px; margin: 10px 0; width: 100%; border-radius: 0; box-sizing: border-box;">
+          <p style="margin: 0 0 10px 0; font-size: 1.45em; font-weight: bold; color: #2563eb;">
+            Retention is shaped across the whole upstream pipeline.
+          </p>
+          <p style="margin: 0; font-weight: bold;">
+            Early exposure makes capabilities less brittle before post-training begins, while replay and dropout further improve durability during post-training itself.
           </p>
         </div>
       </div>

@@ -220,6 +220,16 @@ center img.imp-image {
   margin: 5px !important;
 }
 
+/* Main text-width figures (override narrow inline-image defaults above) */
+.content img.content-figure,
+.hero .content img.content-figure {
+  max-width: 100% !important;
+  width: 100% !important;
+  height: auto !important;
+  display: block !important;
+  margin: 10px 0 !important;
+}
+
 /* Make sure center-aligned images respect container width */
 center img {
   max-width: 45% !important;
@@ -237,5 +247,15 @@ center img {
   margin: 10px auto !important;
 }
 
+/* Figure captions: match body text size; italic for distinction */
+.figure-caption {
+  font-size: 1rem !important;
+  line-height: 1.6 !important;
+  font-style: italic !important;
+}
 
-
+.hero.teaser h2.subtitle.figure-caption {
+  font-size: 1.25rem !important;
+  line-height: 1.55 !important;
+  font-style: normal !important;
+}
